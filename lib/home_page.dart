@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String content = "Write something!";
+  String markdownSource = "Write something!";
 
   bool _editMode = false;
 
@@ -33,18 +33,30 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
         child: !_editMode
-            ? Markdown(data: content, selectable: true)
-            : Column(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      keyboardType: .multiline,
-                      maxLines: null,
-                      expands: true,
-                      controller: _textEditingController,
+            ? Markdown(
+                data: markdownSource,
+                selectable: true,
+
+                padding: .symmetric(vertical: 12.0, horizontal: 16),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 8.0,
+                  horizontal: 16.0,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        keyboardType: .multiline,
+                        maxLines: null,
+                        expands: true,
+                        controller: _textEditingController,
+                        style: TextStyle(fontSize: 13.5),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
       ),
 
@@ -52,9 +64,9 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           setState(() {
             if (_editMode) {
-              content = _textEditingController.text;
+              markdownSource = _textEditingController.text;
             } else {
-              _textEditingController.text = content;
+              _textEditingController.text = markdownSource;
             }
             _editMode = !_editMode;
           });
@@ -66,6 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    _textEditingController.dispose();
     super.dispose();
   }
 }
