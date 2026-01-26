@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             _editMode = !_editMode;
           });
         },
-        child: Icon(!_editMode ? Icons.edit_outlined : Icons.save),
+        child: Icon(!_editMode ? Icons.edit_outlined : Icons.preview),
       ),
     );
   }
