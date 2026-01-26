@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home_page.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -7,11 +9,23 @@ void main() {
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
+  static const seedColor = Colors.red;
+  static final lightColorScheme = ColorScheme.fromSeed(
+    seedColor: seedColor,
+    brightness: Brightness.light,
+  );
+  static final darkColorScheme = ColorScheme.fromSeed(
+    seedColor: seedColor,
+    brightness: .dark,
+  );
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: "Momemo",
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+    return MaterialApp(
+      theme: ThemeData(colorScheme: lightColorScheme),
+      darkTheme: ThemeData(colorScheme: darkColorScheme),
+      themeMode: .dark,
+      home: HomePage(title: "momemo"),
     );
   }
 }
